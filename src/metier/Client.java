@@ -1,6 +1,7 @@
 package metier;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Client
@@ -12,10 +13,12 @@ public class Client
 	
 	private String nom;
 	private List<Facture> facture = new ArrayList<Facture>();
+	private List<Client> listClient = new ArrayList<Client>();
 	
 	public Client(String nom)
 	{
 		this.nom = nom;
+		listClient.add(this);
 	}
 
 	/**
@@ -46,10 +49,11 @@ public class Client
 	
 	
 	
-	public Facture createFacture1(int montant, boolean reglee)
+	public Facture createFacture(int montant)
 	{
-		Facture facture = new Facture(montant, reglee);
-		return facture;
+		Facture factureT = new Facture(this, montant, true, LocalDate.now());
+		facture.add(factureT);
+		return factureT;
 	}
 	
 	/**
@@ -81,11 +85,7 @@ public class Client
 	 * @return la facture créée.
 	 */
 	
-	public Facture createFacture(int montant, boolean reglee)
-	{
-		Facture factureR = new Facture(montant, reglee);
-		return factureR;
-	}	
+	
 	
 	/**
 	 * Retourne la liste des factures reglées. 

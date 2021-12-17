@@ -9,11 +9,13 @@ public class Facture
 	private int montant;
 	private boolean reglee;
 
-	public Facture(int montant2, boolean relgee) {
+
+	public Facture(Client nom, int montant, boolean reglee, LocalDate date) 
+	{
 		this.nom = nom;
-		this.date = date;
 		this.montant = montant;
 		this.reglee = reglee;
+		this.date = date;
 	}
 
 
