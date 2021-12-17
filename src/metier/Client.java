@@ -11,10 +11,11 @@ public class Client
 	 */
 	
 	private String nom;
+	private List<Facture> facture = new ArrayList<Facture>();
 	
 	public Client(String nom)
 	{
-		setNom(nom);
+		this.nom = nom;
 	}
 
 	/**
@@ -45,9 +46,9 @@ public class Client
 	
 	
 	
-	public Facture createFacture(int montant)
+	public Facture createFacture1(int montant, boolean reglee)
 	{
-		Facture facture = new Facture(montant);
+		Facture facture = new Facture(montant, reglee);
 		return facture;
 	}
 	
