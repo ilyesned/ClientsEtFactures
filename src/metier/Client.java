@@ -12,8 +12,8 @@ public class Client
 	 */
 	
 	private String nom;
-	private List<Facture> facture = new ArrayList<Facture>();
-	private List<Client> listClient = new ArrayList<Client>();
+	private List<Facture> factures = new ArrayList<Facture>();
+	private static List<Client> listClient = new ArrayList<>();
 	
 	public Client(String nom)
 	{
@@ -51,9 +51,10 @@ public class Client
 	
 	public Facture createFacture(int montant)
 	{
-		Facture factureT = new Facture(this, montant, true, LocalDate.now());
-		facture.add(factureT);
-		return factureT;
+//		Facture factureT = new Facture(this, montant, false, LocalDate.now());
+//		facture.add(factureT);
+//		return factureT;
+		return createFacture(montant, false);
 	}
 	
 	/**
@@ -65,7 +66,7 @@ public class Client
 	
 	public List<Facture> getFactures()
 	{
-		return null;
+		return new ArrayList<>(factures);
 	}
 	
 	/**
@@ -75,7 +76,10 @@ public class Client
 	
 	public int sommeMontants()
 	{
-		return 0;
+		int somme = 0;
+		for (Facture facture : factures)
+			somme += facture.getMontant();
+		return somme;
 	}
 
 	/**
@@ -85,7 +89,12 @@ public class Client
 	 * @return la facture créée.
 	 */
 	
-	
+	public Facture createFacture(int montant, boolean reglee)
+	{
+//		Facture facture = new Facture(this, montant, reglee);
+//		factures.add(facture);
+		return null;
+	}	
 	
 	/**
 	 * Retourne la liste des factures reglées. 
@@ -94,7 +103,11 @@ public class Client
 
 	public List<Facture> facturesReglees()
 	{
-		return null;
+		List<Facture> facturesReglees = new ArrayList<>();
+		for (Facture facture : factures)
+			if(facture.estReglee())
+				facturesReglees.add(facture);
+		return facturesReglees;
 	}
 	
 
@@ -104,7 +117,10 @@ public class Client
 	 */
 	public static List<Client> tous()
 	{
-		return null;
+		List<Client> clients = new ArrayList<Client>();
+		for (int i = 0; i < clients.size(); i++)
+			clients.add(listClient.get(i));
+		return clients;
 	}
 	
 	/**
@@ -113,5 +129,6 @@ public class Client
 	
 	public void delete()
 	{
+		listClient.remove(this);
 	}
 }
